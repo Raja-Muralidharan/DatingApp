@@ -8,6 +8,7 @@ using API.Data;
 using API.DTOs;
 using API.Interfaces;
 using API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -44,14 +45,14 @@ namespace API.Controllers
         }
 
 
-
+        
         [HttpPost("login")]
-
+        
         public async Task<ActionResult<UserDto>> Login(LoginDtos loginDtos)
         {
             var user = await context.Users.FirstOrDefaultAsync(x => x.UserName == loginDtos.UserName.ToLower());
 
-            if( user == null) return Unauthorized("Invalid Username and Password");
+            if( user == null) return Unauthorized("Invalid Username");
 
             using var hmac = new HMACSHA512(user.PasswordSalt);
 

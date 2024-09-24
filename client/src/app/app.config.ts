@@ -6,10 +6,15 @@ import { routes } from './app.routes';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { platformBrowser } from '@angular/platform-browser';
 import { animation } from '@angular/animations';
+import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes), 
-    provideHttpClient(),provideAnimations()]
+    provideHttpClient(),
+    provideAnimations(),
+    provideToastr({
+      positionClass: 'toast-bottom-right'
+    })]
     
 };

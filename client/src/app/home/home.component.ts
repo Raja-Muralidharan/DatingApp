@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RegiesterComponent } from "../regiester/regiester.component";
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -9,16 +8,11 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit{
-
-
+export class HomeComponent{
 
   registerMode = false;
-  http = inject(HttpClient);
-  users: any;
 
-  ngOnInit(): void {
-    this.getUsers();
+  ngOnInit(): void {  
   }
 
   registerToggle(){
@@ -29,12 +23,5 @@ export class HomeComponent implements OnInit{
     this.registerMode = event;
     }
 
-  getUsers() {
-    this.http.get('http://localhost:5164/api/users').subscribe({
-      next: Response => this.users = Response,
-      error: error => console.log(error),
-      complete: () => console.log('Request has completed')
-    })
-  }
 
 }

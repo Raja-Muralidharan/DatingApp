@@ -30,6 +30,11 @@ export class NavComponent {
     })
   }
 
+  routeToEditpage()
+  {
+    this.router.navigateByUrl('/edit');
+  }
+
   logout(){
     this.accountService.logout();
     this.router.navigateByUrl('/');

@@ -11,6 +11,8 @@ namespace API.DTOs
 
         public required string Token { get; set; }
 
+        public required string KnownAs { get; set; } = string.Empty;
+
         public string? PhotoURL { get; set; }
     }
 }

@@ -30,6 +30,7 @@ namespace API.Extenstions
             services.AddScoped<ITokenService, TockenService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPhotoService, PhtotoService>();
+            services.AddScoped<LogUserActivity>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.Configure<CloudnarySettings>(config.GetSection("CloudinarySettings"));
             return services;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
+using API.DTOs;
 using API.Helpers;
 using API.Interfaces;
 using API.Services;
@@ -29,6 +30,7 @@ namespace API.Extenstions
             services.AddCors();
             services.AddScoped<ITokenService, TockenService>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ILikesRepository, LikesRepository>();
             services.AddScoped<IPhotoService, PhtotoService>();
             services.AddScoped<LogUserActivity>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

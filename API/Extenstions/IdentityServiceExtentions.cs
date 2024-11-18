@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using API.Data;
+using API.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
 namespace API.Extenstions
@@ -14,6 +17,14 @@ namespace API.Extenstions
         public static IServiceCollection AddIdendtityServiceExtention(this IServiceCollection service, 
                                                        IConfiguration config)
         {
+
+            service.AddIdentityCore<AppUser>(opt => {
+                opt.Password.RequireNonAlphanumeric = false;
+             
+            })
+               .AddRoles<AppRole>()
+               .AddRoleManager<RoleManager<AppRole>>()
+               .AddEntityFrameworkStores<DataContext>();
             
             service.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                             .AddJwtBearer(options =>
@@ -27,6 +38,10 @@ namespace API.Extenstions
                                     ValidateAudience = false
                                 };
                             }); 
+
+            service.AddAuthorizationBuilder()
+                .AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"))
+                .AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin", "Moderator"));
 
             return service;
         }

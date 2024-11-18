@@ -4,19 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Extenstions;
+using Microsoft.AspNetCore.Identity;
 
 namespace API.Models
 {
-    public class AppUser
+    public class AppUser : IdentityUser<int>
     {
-
-        public int ID { get; set; }
-
-        public required string UserName { get; set; }
-
-        public byte[] PasswordSalt { get; set; } = [];
-
-        public byte[] PasswordHash { get; set; } = [];
 
         public DateOnly DateOfBirth { get; set; }
 
@@ -46,6 +39,8 @@ namespace API.Models
        public List<Message> MessagesSent { get; set; } = [];
 
        public List<Message> MessagesReceived { get; set; } = [];
+
+       public ICollection<AppUserRole> UserRoles { get; set; } = [];
 
     }
 }

@@ -18,6 +18,7 @@ export class MemberMessagesComponent implements AfterViewChecked {
   messageservice = inject(MessageService);
   @Input() username: string = '';
   messageContent: string = '';
+  loading = false;
 
   constructor(public messageService: MessageService) { }
 
@@ -25,10 +26,11 @@ export class MemberMessagesComponent implements AfterViewChecked {
   sendMessage() {
     
     if (this.username && this.messageContent) {
+      this.loading = true;
       this.messageservice.sendMessage(this.username, this.messageContent).then(() => {
         this.messageForm?.reset();
         this.scrollToBottom();
-      });
+      }).finally(() => this.loading = false);
     }
   }
 

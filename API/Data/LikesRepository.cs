@@ -66,9 +66,6 @@ namespace API.Data
             return await PagedList<MemberDto>.CreateAsync(query,likesparams.PageNumber,likesparams.PageSize);
         }
 
-        public async Task<bool> SaveChanges()
-        {
-           return await context.SaveChangesAsync() > 0;
-        }
+    
     }
 }

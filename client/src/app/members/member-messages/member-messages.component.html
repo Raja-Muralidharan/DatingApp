@@ -1,10 +1,14 @@
 <div class="card">
     <div class="card-body">
-        @if (messages().length === 0) {
+        @if (messageservice.messageThread().length === 0) {
             <p>No messages yet</p>
         } @else {
-            <ul class="chat">
-                @for (message of messages(); track message.id) {
+            <ul 
+            class="chat"
+                #scrollMe
+                style="overflow: scroll; max-height: 500px; scroll-behavior: smooth;"
+            >
+                @for (message of messageservice.messageThread(); track message.id) {
                     <li>
                         <div>
                             <span class="chat-img float-end">
@@ -15,10 +19,10 @@
                                 <div class="header">
                                     <small class="text-muted">
                                         <span class="fa fa-clock-o">{{message.messageSent | timeago}}  </span>
-                                        @if (!message.dateRead && message.senderUsername !== username()) {
+                                        @if (!message.dateRead && message.senderUsername !== username) {
                                             <span class="text-danger">(unread)</span>
                                         }
-                                        @if (message.dateRead && message.senderUsername !== username()) {
+                                        @if (message.dateRead && message.senderUsername !== username) {
                                             <span class="text-success">(read {{message.dateRead | timeago}})</span>
                                         }
                                     </small>
@@ -35,7 +39,7 @@
     <div class="class-footer">
         <form #messageForm="ngForm" (ngSubmit)="sendMessage()">
             <div class="input-group">
-                <input name="messageContent" required [(ngModel)]="messagecontent"  type="text" class="form-control input-sm" placeholder="Send a private message">
+                <input name="messageContent" required [(ngModel)]="messageContent"  type="text" class="form-control input-sm" placeholder="Send a private message">
                 <div class="input-group-append">
                     <button [disabled]="!messageForm.valid" class="btn btn-primary" type="submit">Send</button>
                 </div>

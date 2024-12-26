@@ -26,9 +26,10 @@
         {
             <div dropdown class="dropdown">
                 <img class="mb-2"
-                src="{{ accountService.currentUser()?.PhotoURL}}">
+                src="{{ accountService.currentUser()?.photoURL}}">
+                
                 <a dropdownToggle class="dropdown-toggle text-light text-decoration-none">
-                    Welcome {{accountService.currentUser()?.username}}
+                    Welcome {{accountService.currentUser()?.username?.toLocaleUpperCase()}}
                 </a>
                 <div *dropdownMenu class="dropdown-menu">
                     <a  class="dropdown-item" (click)="routeToEditpage()"> Edit Profile</a>

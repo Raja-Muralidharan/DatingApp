@@ -55,7 +55,7 @@ export class PhotoEditorComponent implements OnInit {
       if (photo.isMain) {
         const user = this.accountSerice.currentUser();
         if (user) {
-          user.PhotoURL = photo.url;
+          user.photoURL = photo.url;
           this.accountSerice.setCurrentUser(user);
         }
         updatedMember.photoURL = photo.url;
@@ -74,7 +74,7 @@ export class PhotoEditorComponent implements OnInit {
       next: (_) => {
         const user = this.accountSerice.currentUser();
         if (user) {
-          user.PhotoURL = Photo.url;
+          user.photoURL = Photo.url;
           this.accountSerice.setCurrentUser(user);
         }
         const updatedMember = { ...this.member() };
